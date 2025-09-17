@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>My Listed Books | BookExchange</title>
+  <title>Мои книги | My Book Exchange</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Header -->
   <header class="flex justify-between items-center p-6 bg-white shadow">
-    <h1 class="text-2xl font-bold text-blue-600">MyBookAdda</h1>
-    <a href="/dashboard" class="text-gray-600 hover:text-blue-600">← Back to Dashboard</a>
+    <h1 class="text-2xl font-bold text-blue-600">My Book Exchange</h1>
+    <a href="/dashboard" class="text-gray-600 hover:text-blue-600">← Назад в личный кабинет</a>
   </header>
 
   <!-- Main Content -->
   <main class="max-w-6xl mx-auto py-10 px-4">
-    <h2 class="text-3xl font-bold mb-6">My Listed Books</h2>
+    <h2 class="text-3xl font-bold mb-6">Мои книги</h2>
 
     {% if books %}
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {% for book in books %}
           <div class="bg-white rounded shadow p-4 hover:shadow-md transition">
-            
+
             <!-- Book Image -->
             {% if book.image_url %}
               <img src="{{ book.image_url }}" alt="{{ book.title }}" class="w-full h-48 object-cover rounded mb-3">
@@ -29,9 +29,9 @@
 
             <!-- Book Details -->
             <h3 class="text-xl font-semibold text-blue-600">{{ book.title }}</h3>
-            <p class="text-sm text-gray-600 mb-1">by {{ book.author }}</p>
-            <p class="text-sm text-gray-500">Condition: {{ book.book_condition }}</p>
-            <p class="text-sm text-gray-500">Points: {{ book.points }}</p>
+            <p class="text-sm text-gray-600 mb-1">автор: {{ book.author }}</p>
+            <p class="text-sm text-gray-500">Состояние: {{ book.book_condition }}</p>
+            <p class="text-sm text-gray-500">Баллы: {{ book.points }}</p>
 
             {% if book.description %}
               <p class="text-sm mt-2">{{ book.description }}</p>
@@ -39,21 +39,21 @@
 
             <!-- Availability -->
             <p class="mt-2 text-xs font-medium {{ 'text-green-600' if book.available else 'text-red-600' }}">
-              {{ 'Available' if book.available else 'Not Available' }}
+              {{ 'Доступна' if book.available else 'Не доступна' }}
             </p>
 
             <!-- Actions -->
             <div class="flex justify-between mt-4">
-              <a href="/edit-book/{{ book.book_id }}" class="text-blue-600 hover:underline text-sm font-medium">✏️ Edit</a>
-              <form action="/delete-book/{{ book.book_id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this book?');">
-                <button type="submit" class="text-red-600 hover:underline text-sm font-medium">🗑️ Delete</button>
+              <a href="/edit-book/{{ book.book_id }}" class="text-blue-600 hover:underline text-sm font-medium">✏️ Редактировать</a>
+              <form action="/delete-book/{{ book.book_id }}" method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить эту книгу?');">
+                <button type="submit" class="text-red-600 hover:underline text-sm font-medium">🗑️ Удалить</button>
               </form>
             </div>
           </div>
         {% endfor %}
       </div>
     {% else %}
-      <p class="text-gray-600 text-center mt-10">You haven't listed any books yet.</p>
+      <p class="text-gray-600 text-center mt-10">Вы еще не добавили ни одной книги.</p>
     {% endif %}
   </main>
 
